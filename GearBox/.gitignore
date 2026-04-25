@@ -1,0 +1,63 @@
+# ============ .NET / ASP.NET ============
+.vs/
+.vscode/
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+*.DotSettings.user
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# Entity Framework
+Migrations/
+*.db
+*.mdf
+*.ldf
+
+# Local settings
+appsettings.Development.json
+appsettings.Local.json
+
+# ============ Angular ============
+client/node_modules/
+client/dist/
+client/.angular/
+client/.vscode/
+client/.idea/
+
+# Angular build
+client/out-tsc/
+client/bazel-out/
+
+# npm/yarn
+package-lock.json
+yarn.lock
+
+# Angular IDE
+client/.idea/
+client/*.swp
+client/*.swo
+
+# ============ General ============
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.local
+.env.*.local
+
+# Docker
+docker-compose.override.yml
+
+# IDEs
+.idea/
+*.iml
+
+# Temp files
+*.tmp
+*.temp
+~*
