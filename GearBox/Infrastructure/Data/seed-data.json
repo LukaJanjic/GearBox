@@ -1,0 +1,257 @@
+{
+  "brands": [
+    { "id": 1, "name": "Salomon" },
+    { "id": 2, "name": "Osprey" },
+    { "id": 3, "name": "The North Face" },
+    { "id": 4, "name": "Garmin" },
+    { "id": 5, "name": "Naturehike" }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Kampovanje",
+      "description": "Sve što trebate za kampovanje",
+      "parentCategoryId": null
+    },
+    {
+      "id": 2,
+      "name": "Planinarenje",
+      "description": "Oprema za planinarenje i hiking",
+      "parentCategoryId": null
+    },
+    {
+      "id": 3,
+      "name": "Trčanje",
+      "description": "Sportska oprema za trčanje",
+      "parentCategoryId": null
+    },
+    {
+      "id": 4,
+      "name": "Biciklizam",
+      "description": "Oprema za biciklizam",
+      "parentCategoryId": null
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Naturehike Cloud Up 2 šator",
+      "description": "Leteći šator za dvojicu sa odličnom ventilacijom",
+      "price": 12500,
+      "stock": 15,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Naturehike+Tent",
+      "isAvailable": true,
+      "brandId": 5,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Osprey Atmos 65 ranac",
+      "description": "Prostravan planinski ranac sa anti-gravity sustavom",
+      "price": 28000,
+      "stock": 8,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Backpack",
+      "isAvailable": true,
+      "brandId": 2,
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "name": "The North Face Venture 2 jakna",
+      "description": "Водонепроницаемая куртка с капюшоном",
+      "price": 18500,
+      "stock": 20,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Jacket",
+      "isAvailable": true,
+      "brandId": 3,
+      "categoryId": 2
+    },
+    {
+      "id": 4,
+      "name": "Salomon Speedcross 6",
+      "description": "Lagane trail patike sa odličnom upravljivošću",
+      "price": 16500,
+      "stock": 25,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Shoes",
+      "isAvailable": true,
+      "brandId": 1,
+      "categoryId": 3
+    },
+    {
+      "id": 5,
+      "name": "Garmin Edge 540 bike computer",
+      "description": "GPS računar sa mapama i analizom performansi",
+      "price": 35000,
+      "stock": 5,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Garmin+Edge",
+      "isAvailable": true,
+      "brandId": 4,
+      "categoryId": 4
+    },
+    {
+      "id": 6,
+      "name": "Naturehike Sleeping Bag",
+      "description": "Topla vreća za spavanje do -10°C",
+      "price": 8500,
+      "stock": 30,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Naturehike+Bag",
+      "isAvailable": true,
+      "brandId": 5,
+      "categoryId": 1
+    },
+    {
+      "id": 7,
+      "name": "The North Face Mountain Light Parka",
+      "description": "Premium zimska jakna za ekstremne uslove",
+      "price": 42000,
+      "stock": 3,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Parka",
+      "isAvailable": true,
+      "brandId": 3,
+      "categoryId": 2
+    },
+    {
+      "id": 8,
+      "name": "Osprey Talon 44 ranac",
+      "description": "Ultralagani hiking ranac za dnevne izlete",
+      "price": 18000,
+      "stock": 12,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Day+Pack",
+      "isAvailable": true,
+      "brandId": 2,
+      "categoryId": 2
+    },
+    {
+      "id": 9,
+      "name": "Salomon XA Pro 3D v9",
+      "description": "Terenske patike sa iznimnom stabilnošću",
+      "price": 19500,
+      "stock": 18,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Trail",
+      "isAvailable": true,
+      "brandId": 1,
+      "categoryId": 3
+    },
+    {
+      "id": 10,
+      "name": "Garmin fēnix 7 sat",
+      "description": "Multisportski GPS sat sa dugom autonomijom",
+      "price": 52000,
+      "stock": 4,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Garmin+Watch",
+      "isAvailable": true,
+      "brandId": 4,
+      "categoryId": 3
+    },
+    {
+      "id": 11,
+      "name": "Naturehike camping kamp kuvar",
+      "description": "Kompletni set za kuvanje na taboru",
+      "price": 6500,
+      "stock": 35,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Camp+Stove",
+      "isAvailable": true,
+      "brandId": 5,
+      "categoryId": 1
+    },
+    {
+      "id": 12,
+      "name": "The North Face Borealis ranac",
+      "description": "Svakodnevni ranac sa laptop komorom",
+      "price": 14500,
+      "stock": 22,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Borealis",
+      "isAvailable": true,
+      "brandId": 3,
+      "categoryId": 1
+    },
+    {
+      "id": 13,
+      "name": "Salomon Quest 4D Pro",
+      "description": "Planinska obuća sa gore penjačkim mogućnostima",
+      "price": 24500,
+      "stock": 10,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Quest",
+      "isAvailable": true,
+      "brandId": 1,
+      "categoryId": 2
+    },
+    {
+      "id": 14,
+      "name": "Osprey Exos 48 ranac",
+      "description": "Ultralagani ruksak za duge planine putovanja",
+      "price": 32000,
+      "stock": 6,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Exos",
+      "isAvailable": true,
+      "brandId": 2,
+      "categoryId": 2
+    },
+    {
+      "id": 15,
+      "name": "Garmin Forerunner 965",
+      "description": "Premium trkaški sat sa AMOLED ekranom",
+      "price": 45000,
+      "stock": 2,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Garmin+Runner",
+      "isAvailable": true,
+      "brandId": 4,
+      "categoryId": 3
+    },
+    {
+      "id": 16,
+      "name": "The North Face Thunder Roundie jakna",
+      "description": "Laka vodootporna jakna za kampovanje",
+      "price": 11500,
+      "stock": 28,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Thunder",
+      "isAvailable": true,
+      "brandId": 3,
+      "categoryId": 1
+    },
+    {
+      "id": 17,
+      "name": "Naturehike Pro šator 2-osoba",
+      "description": "Napredni šator sa ojačanjima",
+      "price": 15000,
+      "stock": 9,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Naturehike+Pro",
+      "isAvailable": true,
+      "brandId": 5,
+      "categoryId": 1
+    },
+    {
+      "id": 18,
+      "name": "Salomon Shoes Sense Ride 5",
+      "description": "Trail patike sa odličnom donjom stranom",
+      "price": 17500,
+      "stock": 20,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Sense",
+      "isAvailable": true,
+      "brandId": 1,
+      "categoryId": 3
+    },
+    {
+      "id": 19,
+      "name": "Osprey Transporter roll-top",
+      "description": "Odličan putni ruksak sa fleksibilnom zapreminom",
+      "price": 22000,
+      "stock": 14,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Transport",
+      "isAvailable": true,
+      "brandId": 2,
+      "categoryId": 4
+    },
+    {
+      "id": 20,
+      "name": "The North Face Ultra Low Pro",
+      "description": "Laganе trkačke patike za ultra distancu",
+      "price": 19000,
+      "stock": 16,
+      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Ultra",
+      "isAvailable": true,
+      "brandId": 3,
+      "categoryId": 3
+    }
+  ]
+}
