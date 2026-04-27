@@ -10,15 +10,15 @@ namespace API.Controllers
     public class ProductsController(IProductsService service) : ControllerBase
     {
         [HttpGet]
-        public ActionResult GetProducts()
+        public async Task<ActionResult> GetProducts()
         {
-            return Ok(service.GetProducts());
+            return Ok(await service.GetProductsAsync());
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetProduct(int id)
+        public async Task<ActionResult> GetProduct(int id)
         {
-            var product = service.GetProductById(id);
+            var product = await service.GetProductByIdAsync(id);
             if (product == null)
             {
                 return NotFound("Product not found");

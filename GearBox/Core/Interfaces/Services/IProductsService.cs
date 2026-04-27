@@ -1,10 +1,9 @@
-using System;
-using Core.Domain.Entities;
+using Core.DTOs;
 
 namespace Core.Interfaces.Services;
 
 public interface IProductsService
 {
-    List<Product> GetProducts();
-    Product GetProductById(int id);
+    Task<List<ProductDto>> GetProductsAsync();
+    Task<ProductDto?> GetProductByIdAsync(int id);
 }
