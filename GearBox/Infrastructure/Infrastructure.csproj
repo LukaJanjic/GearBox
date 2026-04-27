@@ -5,16 +5,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Data\seed-data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
   <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
   <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Repositories\" />
   </ItemGroup>
 
   <PropertyGroup>

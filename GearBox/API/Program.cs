@@ -1,30 +1,20 @@
+using API.Extensions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<GearBoxContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-
-app.UseHttpsRedirection();
+app.UseApplicationMiddleware();
 
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<GearBoxContext>();
+    var context = scope.ServiceProvider.GetRequiredService<GearBoxContext>();
     await context.Database.MigrateAsync();
     await SeedDataService.SeedAsync(context);
 }
 
-
 app.Run();
-
-
