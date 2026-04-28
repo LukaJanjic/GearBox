@@ -27,6 +27,11 @@ public class GenericRepository<T>(GearBoxContext context) : IGenericRepository<T
         return await ApplySpecification(spec).FirstOrDefaultAsync();
     }
 
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        return await SpecificationEvaluator<T>.GetQuery(context.Set<T>(), spec, applyPaging: false).CountAsync();
+    }
+
     private IQueryable<T> ApplySpecification(ISpecification<T> spec)
     {
         return SpecificationEvaluator<T>.GetQuery(context.Set<T>(), spec);

@@ -3,17 +3,26 @@ using Core.Domain.Entities;
 using Core.DTOs;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
+using Core.RequestHelpers;
 using Core.Specifications.Products;
 
 namespace Core.Services;
 
 public class ProductsService(IGenericRepository<Product> repo, IMapper mapper) : IProductsService
 {
-    public async Task<List<ProductDto>> GetProductsAsync()
+    public async Task<Pagination<ProductDto>> GetProductsAsync(ProductQueryParams queryParams)
     {
-        var spec = new ProductsWithBrandAndCategorySpecification();
+        var spec = new ProductsWithBrandAndCategorySpecification(queryParams);
         var products = await repo.GetAllAsync(spec);
-        return mapper.Map<List<ProductDto>>(products);
+        var totalCount = await repo.CountAsync(spec);
+
+        return new Pagination<ProductDto>
+        {
+            PageIndex = queryParams.PageIndex,
+            PageSize = queryParams.PageSize,
+            TotalCount = totalCount,
+            Data = mapper.Map<List<ProductDto>>(products)
+        };
     }
 
     public async Task<ProductDto?> GetProductByIdAsync(int id)

@@ -12,6 +12,10 @@ public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+        services.AddCors(opt => opt.AddPolicy("CorsPolicy", policy =>
+        {
+            policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "http://localhost:3000");
+        }));
         services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
         services.AddControllers();
         services.AddDbContext<GearBoxContext>(options =>

@@ -1,6 +1,5 @@
 using Core.Interfaces.Services;
-using Infrastructure.Data;
-using Microsoft.AspNetCore.Http;
+using Core.RequestHelpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -10,9 +9,9 @@ namespace API.Controllers
     public class ProductsController(IProductsService service) : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult> GetProducts()
+        public async Task<ActionResult> GetProducts([FromQuery] ProductQueryParams queryParams)
         {
-            return Ok(await service.GetProductsAsync());
+            return Ok(await service.GetProductsAsync(queryParams));
         }
 
         [HttpGet("{id}")]
