@@ -17,12 +17,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetProduct(int id)
         {
-            var product = await service.GetProductByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound("Product not found");
-            }
-            return Ok(product);
+            return Ok(await service.GetProductByIdAsync(id));
         }
 
 

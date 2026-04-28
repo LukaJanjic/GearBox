@@ -18,12 +18,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBrand(int id)
         {
-            var brand = await brandService.GetBrandByIdAsync(id);
-            if (brand == null)
-            {
-                return NotFound();
-            }
-            return Ok(brand);
+            return Ok(await brandService.GetBrandByIdAsync(id));
         }
     }
 }

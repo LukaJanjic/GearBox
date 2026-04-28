@@ -1,6 +1,7 @@
 using AutoMapper;
 using Core.Domain.Entities;
 using Core.DTOs;
+using Core.Exceptions;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.RequestHelpers;
@@ -25,10 +26,11 @@ public class ProductsService(IGenericRepository<Product> repo, IMapper mapper) :
         };
     }
 
-    public async Task<ProductDto?> GetProductByIdAsync(int id)
+    public async Task<ProductDto> GetProductByIdAsync(int id)
     {
         var spec = new ProductsWithBrandAndCategorySpecification(id);
-        var product = await repo.GetEntityAsync(spec);
-        return mapper.Map<ProductDto?>(product);
+        var product = await repo.GetEntityAsync(spec)
+            ?? throw new NotFoundException($"Product with id {id} not found");
+        return mapper.Map<ProductDto>(product);
     }
 }
