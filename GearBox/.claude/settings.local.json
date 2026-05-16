@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(node node_modules/@angular/cli/bin/ng.js add @angular/material --skip-confirmation)",
-      "Bash(node node_modules/@angular/cli/bin/ng.js build)"
+      "Bash(node node_modules/@angular/cli/bin/ng.js build)",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }
