@@ -1,0 +1,25 @@
+<header class="bg-gray-900 text-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <a routerLink="/" class="text-2xl font-bold tracking-widest uppercase text-white hover:text-gray-300 transition-colors">
+        GearBox
+      </a>
+
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel" backgroundColor="primary" class="border-none">
+        @for (link of navLinks; track link.path) {
+          <a mat-tab-link
+             [routerLink]="link.path"
+             routerLinkActive
+             #rla="routerLinkActive"
+             [active]="rla.isActive">
+            {{ link.label }}
+          </a>
+        }
+      </nav>
+
+    </div>
+  </div>
+</header>
+
+<mat-tab-nav-panel #tabPanel />
