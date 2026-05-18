@@ -18,12 +18,18 @@ public class ProductsWithBrandAndCategorySpecification : BaseSpecification<Produ
 
     public ProductsWithBrandAndCategorySpecification(ProductQueryParams queryParams) : this()
     {
+        var brands     = queryParams.Brands is { Count: > 0 } ? queryParams.Brands : null;
+        var categories = queryParams.Categories is { Count: > 0 } ? queryParams.Categories : null;
+        var search     = queryParams.Search;
+        var minPrice   = queryParams.MinPrice;
+        var maxPrice   = queryParams.MaxPrice;
+
         AddCriteria(p =>
-            (string.IsNullOrEmpty(queryParams.Brand) || p.Brand!.Name == queryParams.Brand) &&
-            (string.IsNullOrEmpty(queryParams.Category) || p.Category!.Name == queryParams.Category) &&
-            (string.IsNullOrEmpty(queryParams.Search) || p.Name!.Contains(queryParams.Search)) &&
-            (queryParams.MinPrice == null || p.Price >= queryParams.MinPrice) &&
-            (queryParams.MaxPrice == null || p.Price <= queryParams.MaxPrice)
+            (brands == null     || brands.Contains(p.Brand!.Name!)) &&
+            (categories == null || categories.Contains(p.Category!.Name!)) &&
+            (search == null     || p.Name!.Contains(search)) &&
+            (minPrice == null   || p.Price >= minPrice) &&
+            (maxPrice == null   || p.Price <= maxPrice)
         );
         switch (queryParams.Sort)
         {

@@ -23,6 +23,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IProductsService, ProductsService>();
         services.AddScoped<IBrandService, BrandsService>();
+        services.AddScoped<ICategoryService, CategoriesService>();
         return services;
     }
 }
