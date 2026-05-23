@@ -39,7 +39,7 @@
       "description": "Leteći šator za dvojicu sa odličnom ventilacijom",
       "price": 12500,
       "stock": 15,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Naturehike+Tent",
+      "pictureUrl": "https://loremflickr.com/400/300/tent,camping?lock=1",
       "isAvailable": true,
       "brandId": 5,
       "categoryId": 1
@@ -50,7 +50,7 @@
       "description": "Prostravan planinski ranac sa anti-gravity sustavom",
       "price": 28000,
       "stock": 8,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Backpack",
+      "pictureUrl": "https://loremflickr.com/400/300/backpack,hiking?lock=2",
       "isAvailable": true,
       "brandId": 2,
       "categoryId": 2
@@ -58,10 +58,10 @@
     {
       "id": 3,
       "name": "The North Face Venture 2 jakna",
-      "description": "Водонепроницаемая куртка с капюшоном",
+      "description": "Vodootporna jakna sa kapuljačom za sve vremenske uslove",
       "price": 18500,
       "stock": 20,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Jacket",
+      "pictureUrl": "https://loremflickr.com/400/300/rain,jacket?lock=3",
       "isAvailable": true,
       "brandId": 3,
       "categoryId": 2
@@ -72,7 +72,7 @@
       "description": "Lagane trail patike sa odličnom upravljivošću",
       "price": 16500,
       "stock": 25,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Shoes",
+      "pictureUrl": "https://loremflickr.com/400/300/trail,shoes?lock=4",
       "isAvailable": true,
       "brandId": 1,
       "categoryId": 3
@@ -83,7 +83,7 @@
       "description": "GPS računar sa mapama i analizom performansi",
       "price": 35000,
       "stock": 5,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Garmin+Edge",
+      "pictureUrl": "https://loremflickr.com/400/300/cycling,gps?lock=5",
       "isAvailable": true,
       "brandId": 4,
       "categoryId": 4
@@ -94,7 +94,7 @@
       "description": "Topla vreća za spavanje do -10°C",
       "price": 8500,
       "stock": 30,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Naturehike+Bag",
+      "pictureUrl": "https://loremflickr.com/400/300/sleeping,bag?lock=6",
       "isAvailable": true,
       "brandId": 5,
       "categoryId": 1
@@ -105,7 +105,7 @@
       "description": "Premium zimska jakna za ekstremne uslove",
       "price": 42000,
       "stock": 3,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Parka",
+      "pictureUrl": "https://loremflickr.com/400/300/parka,winter?lock=7",
       "isAvailable": true,
       "brandId": 3,
       "categoryId": 2
@@ -116,7 +116,7 @@
       "description": "Ultralagani hiking ranac za dnevne izlete",
       "price": 18000,
       "stock": 12,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Day+Pack",
+      "pictureUrl": "https://loremflickr.com/400/300/backpack,trail?lock=8",
       "isAvailable": true,
       "brandId": 2,
       "categoryId": 2
@@ -127,7 +127,7 @@
       "description": "Terenske patike sa iznimnom stabilnošću",
       "price": 19500,
       "stock": 18,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Trail",
+      "pictureUrl": "https://loremflickr.com/400/300/hiking,shoes?lock=9",
       "isAvailable": true,
       "brandId": 1,
       "categoryId": 3
@@ -138,7 +138,7 @@
       "description": "Multisportski GPS sat sa dugom autonomijom",
       "price": 52000,
       "stock": 4,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Garmin+Watch",
+      "pictureUrl": "https://loremflickr.com/400/300/smartwatch,sport?lock=10",
       "isAvailable": true,
       "brandId": 4,
       "categoryId": 3
@@ -149,7 +149,7 @@
       "description": "Kompletni set za kuvanje na taboru",
       "price": 6500,
       "stock": 35,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Camp+Stove",
+      "pictureUrl": "https://loremflickr.com/400/300/camping,stove?lock=11",
       "isAvailable": true,
       "brandId": 5,
       "categoryId": 1
@@ -160,7 +160,7 @@
       "description": "Svakodnevni ranac sa laptop komorom",
       "price": 14500,
       "stock": 22,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Borealis",
+      "pictureUrl": "https://loremflickr.com/400/300/backpack,laptop?lock=12",
       "isAvailable": true,
       "brandId": 3,
       "categoryId": 1
@@ -171,7 +171,7 @@
       "description": "Planinska obuća sa gore penjačkim mogućnostima",
       "price": 24500,
       "stock": 10,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Quest",
+      "pictureUrl": "https://loremflickr.com/400/300/hiking,boots?lock=13",
       "isAvailable": true,
       "brandId": 1,
       "categoryId": 2
@@ -179,10 +179,10 @@
     {
       "id": 14,
       "name": "Osprey Exos 48 ranac",
-      "description": "Ultralagani ruksak za duge planine putovanja",
+      "description": "Ultralagani ruksak za duge planinske putovanje",
       "price": 32000,
       "stock": 6,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Exos",
+      "pictureUrl": "https://loremflickr.com/400/300/backpack,mountain?lock=14",
       "isAvailable": true,
       "brandId": 2,
       "categoryId": 2
@@ -193,7 +193,7 @@
       "description": "Premium trkaški sat sa AMOLED ekranom",
       "price": 45000,
       "stock": 2,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Garmin+Runner",
+      "pictureUrl": "https://loremflickr.com/400/300/running,watch?lock=15",
       "isAvailable": true,
       "brandId": 4,
       "categoryId": 3
@@ -204,7 +204,7 @@
       "description": "Laka vodootporna jakna za kampovanje",
       "price": 11500,
       "stock": 28,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Thunder",
+      "pictureUrl": "https://loremflickr.com/400/300/jacket,outdoor?lock=16",
       "isAvailable": true,
       "brandId": 3,
       "categoryId": 1
@@ -215,7 +215,7 @@
       "description": "Napredni šator sa ojačanjima",
       "price": 15000,
       "stock": 9,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Naturehike+Pro",
+      "pictureUrl": "https://loremflickr.com/400/300/tent,outdoor?lock=17",
       "isAvailable": true,
       "brandId": 5,
       "categoryId": 1
@@ -226,7 +226,7 @@
       "description": "Trail patike sa odličnom donjom stranom",
       "price": 17500,
       "stock": 20,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Salomon+Sense",
+      "pictureUrl": "https://loremflickr.com/400/300/running,shoes?lock=18",
       "isAvailable": true,
       "brandId": 1,
       "categoryId": 3
@@ -237,7 +237,7 @@
       "description": "Odličan putni ruksak sa fleksibilnom zapreminom",
       "price": 22000,
       "stock": 14,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=Osprey+Transport",
+      "pictureUrl": "https://loremflickr.com/400/300/travel,bag?lock=19",
       "isAvailable": true,
       "brandId": 2,
       "categoryId": 4
@@ -245,10 +245,10 @@
     {
       "id": 20,
       "name": "The North Face Ultra Low Pro",
-      "description": "Laganе trkačke patike za ultra distancu",
+      "description": "Lagane trkačke patike za ultra distancu",
       "price": 19000,
       "stock": 16,
-      "pictureUrl": "https://via.placeholder.com/300x300?text=TNF+Ultra",
+      "pictureUrl": "https://loremflickr.com/400/300/trail,running?lock=20",
       "isAvailable": true,
       "brandId": 3,
       "categoryId": 3

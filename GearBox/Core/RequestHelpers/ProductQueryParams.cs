@@ -9,5 +9,5 @@ public class ProductQueryParams
     public decimal? MaxPrice { get; set; }
     public string? Sort { get; set; }
     public int PageIndex { get; set; } = 1;
-    public int PageSize { get; set; } = 10;
+    public int PageSize { get; set; } = 9;
 }

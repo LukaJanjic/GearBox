@@ -9,7 +9,12 @@ public static class MiddlewarePipelineExtensions
         app.UseMiddleware<ExceptionMiddleware>();
 
         app.UseCors("CorsPolicy");
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
         app.MapControllers();
+
         return app;
     }
 }

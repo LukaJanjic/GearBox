@@ -1,13 +1,17 @@
-namespace Infrastructure.Data;
-
 using Core.Domain.Entities;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class GearBoxContext(DbContextOptions<GearBoxContext> options) : DbContext(options)
+namespace Infrastructure.Data;
+
+public class GearBoxContext(DbContextOptions<GearBoxContext> options)
+    : IdentityDbContext<AppUser, IdentityRole, string>(options)
 {
-    public DbSet<Product> Products { get; set; }
+    public DbSet<Product>  Products   { get; set; }
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Brand> Brands { get; set; }
+    public DbSet<Brand>    Brands     { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
