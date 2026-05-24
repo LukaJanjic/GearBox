@@ -1,0 +1,134 @@
+<!-- Loading -->
+@if (loading()) {
+  <div class="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div class="flex flex-col items-center gap-4">
+      <div class="w-12 h-12 border-4 border-green-700 border-t-transparent rounded-full animate-spin"></div>
+      <p class="text-gray-500 text-sm">Loading product...</p>
+    </div>
+  </div>
+}
+
+<!-- Error -->
+@if (error()) {
+  <div class="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div class="text-center">
+      <p class="text-2xl font-bold text-gray-800 mb-2">Product not found</p>
+      <p class="text-gray-500 mb-6">{{ error() }}</p>
+      <a routerLink="/shop"
+        class="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors duration-200">
+        Back to Shop
+      </a>
+    </div>
+  </div>
+}
+
+<!-- Content -->
+@if (!loading() && !error() && product(); as p) {
+  <div class="min-h-screen bg-gray-50">
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-gray-500">
+        <a routerLink="/shop" class="hover:text-green-700 transition-colors duration-150">Shop</a>
+        <span>/</span>
+        <span class="text-green-700 font-medium truncate max-w-xs">{{ p.name }}</span>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+
+          <!-- Image panel -->
+          <div class="relative bg-gray-900 flex items-center justify-center min-h-80 lg:min-h-[520px]">
+            @if (p.pictureUrl) {
+              <img [src]="p.pictureUrl" [alt]="p.name"
+                class="w-full h-full object-cover absolute inset-0 opacity-90" />
+            } @else {
+              <svg class="w-24 h-24 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            }
+
+            <!-- Availability badge -->
+            <div class="absolute top-4 left-4">
+              @if (p.isAvailable) {
+                <span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">In Stock</span>
+              } @else {
+                <span class="bg-gray-600 text-white text-xs font-bold px-3 py-1 rounded-full">Unavailable</span>
+              }
+            </div>
+          </div>
+
+          <!-- Info panel -->
+          <div class="p-8 lg:p-12 flex flex-col">
+
+            <!-- Brand + Category -->
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-xs font-bold text-green-700 uppercase tracking-widest">{{ p.brand }}</span>
+              <span class="text-gray-300">·</span>
+              <span class="text-xs text-gray-400 uppercase tracking-wide">{{ p.category }}</span>
+            </div>
+
+            <!-- Name -->
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 leading-snug mb-6">
+              {{ p.name }}
+            </h1>
+
+            <!-- Price -->
+            <div class="flex items-baseline gap-3 mb-6">
+              <span class="text-4xl font-extrabold text-gray-900">
+                {{ p.price | currency:'EUR':'symbol':'1.2-2' }}
+              </span>
+            </div>
+
+            <!-- Description -->
+            <p class="text-gray-600 leading-relaxed mb-8 flex-1">
+              {{ p.description }}
+            </p>
+
+            <!-- Details grid -->
+            <div class="grid grid-cols-2 gap-4 mb-8 p-4 bg-gray-50 rounded-xl">
+              <div>
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Brand</p>
+                <p class="text-sm font-semibold text-gray-800">{{ p.brand }}</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Category</p>
+                <p class="text-sm font-semibold text-gray-800">{{ p.category }}</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Stock</p>
+                <p class="text-sm font-semibold text-gray-800">{{ p.stock }} units</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Availability</p>
+                <p class="text-sm font-semibold" [class]="p.isAvailable ? 'text-green-600' : 'text-gray-400'">
+                  {{ p.isAvailable ? 'Available' : 'Unavailable' }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button
+                [disabled]="!p.isAvailable"
+                class="flex-1 py-3 rounded-xl text-sm font-bold bg-green-700 hover:bg-green-800 text-white transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
+                Add to Cart
+              </button>
+              <a routerLink="/shop"
+                class="flex-1 py-3 rounded-xl text-sm font-bold border-2 border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-800 transition-colors duration-200 text-center">
+                Back to Shop
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+}

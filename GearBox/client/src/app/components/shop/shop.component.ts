@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProductService } from '../../core/services/product.service';
 import { BrandService } from '../../core/services/brand.service';
@@ -18,6 +19,7 @@ export class ShopComponent implements OnInit {
   private productService  = inject(ProductService);
   private brandService    = inject(BrandService);
   private categoryService = inject(CategoryService);
+  private router          = inject(Router);
 
   products   = signal<Product[]>([]);
   brands     = signal<Brand[]>([]);
@@ -32,7 +34,7 @@ export class ShopComponent implements OnInit {
 
   totalCount = signal(0);
   pageIndex  = signal(1);
-  pageSize   = signal(10);
+  pageSize   = signal(9);
   loading    = signal(true);
   error      = signal<string | null>(null);
 
@@ -147,6 +149,10 @@ export class ShopComponent implements OnInit {
     this.maxPrice.set(null);
     this.pageIndex.set(1);
     this.loadProducts();
+  }
+
+  goToDetail(id: number) {
+    this.router.navigate(['/product', id]);
   }
 
   goToPage(page: number) {

@@ -4,8 +4,8 @@
 
       <!-- Logo -->
       <a routerLink="/" class="logo-link group flex items-center gap-1 select-none">
-        <span class="text-white text-2xl font-bold tracking-widest uppercase transition-colors duration-200 group-hover:text-orange-400">Gear</span>
-        <span class="text-orange-500 text-2xl font-bold tracking-widest uppercase transition-colors duration-200 group-hover:text-orange-300">Box</span>
+        <span class="text-white text-2xl font-bold tracking-widest uppercase transition-colors duration-200 group-hover:text-green-500">Gear</span>
+        <span class="text-green-700 text-2xl font-bold tracking-widest uppercase transition-colors duration-200 group-hover:text-green-400">Box</span>
       </a>
 
       <!-- Nav links -->
@@ -23,8 +23,8 @@
           <!-- Logged in -->
           <div class="flex items-center gap-3">
             <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-full bg-orange-500/20 border border-orange-500/40 flex items-center justify-center shrink-0">
-                <span class="text-orange-400 text-xs font-bold">
+              <div class="w-8 h-8 rounded-full bg-green-700/20 border border-green-700/40 flex items-center justify-center shrink-0">
+                <span class="text-green-500 text-xs font-bold">
                   {{ authService.currentUser()!.firstName[0] }}{{ authService.currentUser()!.lastName[0] }}
                 </span>
               </div>
@@ -36,7 +36,7 @@
               </div>
             </div>
             <button (click)="authService.logout()"
-              class="text-xs font-medium text-gray-400 hover:text-orange-400 border border-gray-700 hover:border-orange-500/50 px-3 py-1.5 rounded-lg transition-all duration-200">
+              class="text-xs font-medium text-gray-400 hover:text-green-500 border border-gray-700 hover:border-green-700/50 px-3 py-1.5 rounded-lg transition-all duration-200">
               Sign Out
             </button>
           </div>
@@ -47,7 +47,7 @@
             Sign In
           </a>
           <a routerLink="/register"
-            class="text-sm font-semibold bg-orange-500 hover:bg-orange-600 text-white px-4 py-1.5 rounded-lg transition-colors duration-200">
+            class="text-sm font-semibold bg-green-700 hover:bg-green-800 text-white px-4 py-1.5 rounded-lg transition-colors duration-200">
             Register
           </a>
         }

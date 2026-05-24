@@ -63,7 +63,7 @@
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    border: 2px solid #f97316;
+    border: 2px solid #15803d;
     animation: pulseRing 2s ease-out infinite;
   }
 
@@ -74,7 +74,7 @@
 
 .form-input {
   @apply w-full px-4 py-2.5 text-sm border rounded-lg bg-white text-gray-800
-         focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent
+         focus:outline-none focus:ring-2 focus:ring-green-700 focus:border-transparent
          transition-all duration-200 placeholder-gray-400;
 
   &.error {

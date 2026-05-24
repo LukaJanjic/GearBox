@@ -24,7 +24,7 @@ export class ProductService {
   getProducts(params: ProductParams = {}): Observable<Pagination<Product>> {
     let httpParams = new HttpParams()
       .set('pageIndex', params.pageIndex ?? 1)
-      .set('pageSize', params.pageSize ?? 10);
+      .set('pageSize', params.pageSize ?? 9);
 
     params.brands?.forEach(b => httpParams = httpParams.append('brands', b));
     params.categories?.forEach(c => httpParams = httpParams.append('categories', c));
