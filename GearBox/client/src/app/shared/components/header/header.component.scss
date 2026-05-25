@@ -11,7 +11,6 @@
   border-radius: 0.375rem;
   transition: color 0.2s ease, background-color 0.2s ease;
 
-  // animated bottom line
   &::after {
     content: '';
     position: absolute;
@@ -19,14 +18,14 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #f97316;
+    background-color: #16a34a;
     border-radius: 1px;
     transition: width 0.25s ease, left 0.25s ease;
   }
 
   &:hover {
     color: #ffffff;
-    background-color: rgba(249, 115, 22, 0.08);
+    background-color: rgba(22, 163, 74, 0.08);
 
     &::after {
       width: 80%;
@@ -35,19 +34,19 @@
   }
 
   &:focus-visible {
-    outline: 2px solid #f97316;
+    outline: 2px solid #16a34a;
     outline-offset: 2px;
     color: #ffffff;
   }
 
   &.active-link {
-    color: #f97316;
-    background-color: rgba(249, 115, 22, 0.1);
+    color: #16a34a;
+    background-color: rgba(22, 163, 74, 0.1);
 
     &::after {
       width: 80%;
       left: 10%;
-      background-color: #f97316;
+      background-color: #16a34a;
     }
   }
 }

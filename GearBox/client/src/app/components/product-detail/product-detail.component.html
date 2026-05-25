@@ -2,7 +2,7 @@
 @if (loading()) {
   <div class="min-h-screen bg-gray-50 flex items-center justify-center">
     <div class="flex flex-col items-center gap-4">
-      <div class="w-12 h-12 border-4 border-green-700 border-t-transparent rounded-full animate-spin"></div>
+      <div class="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
       <p class="text-gray-500 text-sm">Loading product...</p>
     </div>
   </div>
@@ -15,7 +15,7 @@
       <p class="text-2xl font-bold text-gray-800 mb-2">Product not found</p>
       <p class="text-gray-500 mb-6">{{ error() }}</p>
       <a routerLink="/shop"
-        class="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors duration-200">
+        class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors duration-200">
         Back to Shop
       </a>
     </div>
@@ -29,9 +29,9 @@
     <!-- Breadcrumb -->
     <div class="bg-white border-b border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-sm text-gray-500">
-        <a routerLink="/shop" class="hover:text-green-700 transition-colors duration-150">Shop</a>
+        <a routerLink="/shop" class="hover:text-green-600 transition-colors duration-150">Shop</a>
         <span>/</span>
-        <span class="text-green-700 font-medium truncate max-w-xs">{{ p.name }}</span>
+        <span class="text-green-600 font-medium truncate max-w-xs">{{ p.name }}</span>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
 
             <!-- Brand + Category -->
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-xs font-bold text-green-700 uppercase tracking-widest">{{ p.brand }}</span>
+              <span class="text-xs font-bold text-green-600 uppercase tracking-widest">{{ p.brand }}</span>
               <span class="text-gray-300">·</span>
               <span class="text-xs text-gray-400 uppercase tracking-wide">{{ p.category }}</span>
             </div>
@@ -116,7 +116,7 @@
             <div class="flex flex-col sm:flex-row gap-3">
               <button
                 [disabled]="!p.isAvailable"
-                class="flex-1 py-3 rounded-xl text-sm font-bold bg-green-700 hover:bg-green-800 text-white transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
+                class="flex-1 py-3 rounded-xl text-sm font-bold bg-green-600 hover:bg-green-700 text-white transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
                 Add to Cart
               </button>
               <a routerLink="/shop"

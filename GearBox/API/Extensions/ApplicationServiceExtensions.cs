@@ -3,6 +3,7 @@ using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Mappings;
 using Core.Services;
+using Infrastructure.Cart;
 using Infrastructure.Data;
 using Infrastructure.Data.Repositories;
 using Infrastructure.Identity;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 
 namespace API.Extensions;
 
@@ -62,6 +64,11 @@ public static class ApplicationServiceExtensions
             });
 
         services.AddAuthorization();
+
+        // Redis
+        services.AddSingleton<IConnectionMultiplexer>(_ =>
+            ConnectionMultiplexer.Connect(config.GetConnectionString("Redis") ?? "localhost:6379"));
+        services.AddScoped<ICartService, CartService>();
 
         return services;
     }
