@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class LoginComponent {
   private fb          = inject(FormBuilder);
   private authService = inject(AuthService);
+  private cartService = inject(CartService);
   private router      = inject(Router);
 
   form = this.fb.group({
@@ -33,7 +35,12 @@ export class LoginComponent {
     this.error.set(null);
 
     this.authService.login(email!, password!).subscribe({
-      next: () => this.router.navigateByUrl('/shop'),
+      next: () => {
+        this.cartService.syncGuestCartOnLogin().subscribe({
+          complete: () => { this.cartService.loadCart().subscribe(); this.router.navigateByUrl('/shop'); },
+          error:    () => this.router.navigateByUrl('/shop'),
+        });
+      },
       error: (err) => {
         this.error.set(err?.error?.message ?? 'Invalid email or password');
         this.loading.set(false);

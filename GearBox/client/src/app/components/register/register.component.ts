@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { CartService } from '../../core/services/cart.service';
 
 function passwordMatch(control: AbstractControl): ValidationErrors | null {
   const password        = control.get('password')?.value;
@@ -20,6 +21,7 @@ function passwordMatch(control: AbstractControl): ValidationErrors | null {
 export class RegisterComponent {
   private fb          = inject(FormBuilder);
   private authService = inject(AuthService);
+  private cartService = inject(CartService);
   private router      = inject(Router);
 
   form = this.fb.group({
@@ -43,7 +45,12 @@ export class RegisterComponent {
     this.error.set(null);
 
     this.authService.register(firstName!, lastName!, email!, password!).subscribe({
-      next: () => this.router.navigateByUrl('/shop'),
+      next: () => {
+        this.cartService.syncGuestCartOnLogin().subscribe({
+          complete: () => { this.cartService.loadCart().subscribe(); this.router.navigateByUrl('/shop'); },
+          error:    () => this.router.navigateByUrl('/shop'),
+        });
+      },
       error: (err) => {
         this.error.set(err?.error?.message ?? 'Registration failed. Please try again.');
         this.loading.set(false);

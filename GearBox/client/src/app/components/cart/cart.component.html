@@ -1,0 +1,115 @@
+<!-- Backdrop -->
+@if (cartService.isOpen()) {
+  <div class="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm" (click)="cartService.closeCart()"></div>
+}
+
+<!-- Drawer -->
+<div
+  class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-gray-950 border-l border-gray-800 z-50 flex flex-col shadow-2xl transition-transform duration-300"
+  [class.translate-x-0]="cartService.isOpen()"
+  [class.translate-x-full]="!cartService.isOpen()">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-6 py-4 border-b border-gray-800">
+    <div class="flex items-center gap-3">
+      <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+      <h2 class="text-white font-bold text-lg tracking-wide">YOUR CART</h2>
+      @if (cartService.itemCount() > 0) {
+        <span class="bg-green-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+          {{ cartService.itemCount() }}
+        </span>
+      }
+    </div>
+    <button (click)="cartService.closeCart()"
+      class="text-gray-400 hover:text-white transition-colors duration-150 p-1 rounded-lg hover:bg-gray-800">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Items -->
+  <div class="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+
+    @if (!cartService.cart() || cartService.cart()!.items.length === 0) {
+      <!-- Empty state -->
+      <div class="flex flex-col items-center justify-center h-full gap-4 text-center py-16">
+        <svg class="w-16 h-16 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <p class="text-gray-500 text-sm">Your cart is empty.</p>
+        <button (click)="cartService.closeCart()" routerLink="/shop"
+          class="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors duration-200">
+          Browse Shop
+        </button>
+      </div>
+    }
+
+    @for (item of cartService.cart()?.items; track item.productId) {
+      <div class="flex gap-4 bg-gray-900 rounded-xl p-4 border border-gray-800">
+
+        <!-- Image -->
+        <div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-gray-800">
+          @if (item.pictureUrl) {
+            <img [src]="item.pictureUrl" [alt]="item.name" class="w-full h-full object-cover" />
+          }
+        </div>
+
+        <!-- Info -->
+        <div class="flex-1 min-w-0">
+          <p class="text-white text-sm font-semibold truncate">{{ item.name }}</p>
+          <p class="text-gray-500 text-xs mt-0.5">{{ item.brand }}</p>
+          <p class="text-green-400 font-bold text-sm mt-1">{{ item.price | currency:'EUR':'symbol':'1.2-2' }}</p>
+
+          <!-- Quantity controls -->
+          <div class="flex items-center gap-2 mt-3">
+            <button (click)="decrement(item)"
+              class="w-7 h-7 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white flex items-center justify-center transition-colors duration-150 text-sm font-bold">
+              −
+            </button>
+            <span class="text-white text-sm font-semibold w-6 text-center">{{ item.quantity }}</span>
+            <button (click)="increment(item)"
+              class="w-7 h-7 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white flex items-center justify-center transition-colors duration-150 text-sm font-bold">
+              +
+            </button>
+            <button (click)="remove(item.productId)"
+              class="ml-auto text-gray-600 hover:text-red-400 transition-colors duration-150">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+
+  <!-- Footer -->
+  @if (cartService.cart() && cartService.cart()!.items.length > 0) {
+    <div class="border-t border-gray-800 px-6 py-5 space-y-4">
+
+      <!-- Subtotal -->
+      <div class="flex items-center justify-between">
+        <span class="text-gray-400 text-sm">Subtotal</span>
+        <span class="text-white font-bold text-lg">{{ cartService.total() | currency:'EUR':'symbol':'1.2-2' }}</span>
+      </div>
+
+      <!-- Checkout -->
+      <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-colors duration-200 text-sm tracking-wide">
+        Proceed to Checkout
+      </button>
+
+      <!-- Clear cart -->
+      <button (click)="clear()"
+        class="w-full text-gray-500 hover:text-red-400 text-xs font-medium transition-colors duration-150">
+        Clear Cart
+      </button>
+    </div>
+  }
+
+</div>

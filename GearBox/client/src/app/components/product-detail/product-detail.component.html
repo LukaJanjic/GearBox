@@ -115,9 +115,10 @@
             <!-- Actions -->
             <div class="flex flex-col sm:flex-row gap-3">
               <button
-                [disabled]="!p.isAvailable"
+                (click)="addToCart(p)"
+                [disabled]="!p.isAvailable || adding()"
                 class="flex-1 py-3 rounded-xl text-sm font-bold bg-green-600 hover:bg-green-700 text-white transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
-                Add to Cart
+                {{ adding() ? 'Adding...' : 'Add to Cart' }}
               </button>
               <a routerLink="/shop"
                 class="flex-1 py-3 rounded-xl text-sm font-bold border-2 border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-800 transition-colors duration-200 text-center">
