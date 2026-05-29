@@ -100,7 +100,8 @@
       </div>
 
       <!-- Checkout -->
-      <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-colors duration-200 text-sm tracking-wide">
+      <button (click)="cartService.closeCart()" routerLink="/checkout"
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-colors duration-200 text-sm tracking-wide">
         Proceed to Checkout
       </button>
 

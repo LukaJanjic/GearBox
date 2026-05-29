@@ -6,6 +6,7 @@ using Core.Services;
 using Infrastructure.Cart;
 using Infrastructure.Data;
 using Infrastructure.Data.Repositories;
+using Infrastructure.Payment;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -69,6 +70,7 @@ public static class ApplicationServiceExtensions
         services.AddSingleton<IConnectionMultiplexer>(_ =>
             ConnectionMultiplexer.Connect(config.GetConnectionString("Redis") ?? "localhost:6379"));
         services.AddScoped<ICartService, CartService>();
+        services.AddScoped<IPaymentService, PaymentService>();
 
         return services;
     }
