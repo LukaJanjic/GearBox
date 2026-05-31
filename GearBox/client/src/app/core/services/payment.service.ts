@@ -9,7 +9,8 @@ export class PaymentService {
   private http   = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/payment`;
 
-  createPaymentIntent(): Observable<PaymentIntentResponse> {
-    return this.http.post<PaymentIntentResponse>(`${this.apiUrl}/create-intent`, {});
+  createPaymentIntent(guestTotal?: number): Observable<PaymentIntentResponse> {
+    const body = guestTotal !== undefined ? { amount: guestTotal } : {};
+    return this.http.post<PaymentIntentResponse>(`${this.apiUrl}/create-intent`, body);
   }
 }

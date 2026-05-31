@@ -7,22 +7,36 @@ namespace Infrastructure.Payment;
 
 public class PaymentService(ICartService cartService, IConfiguration config) : IPaymentService
 {
-    public async Task<string> CreatePaymentIntentAsync(string userId)
+    public async Task<string> CreatePaymentIntentAsync(string? userId, decimal? guestAmount = null)
     {
         StripeConfiguration.ApiKey = config["Stripe:SecretKey"];
 
-        var cart = await cartService.GetCartAsync(userId);
-        if (cart is null || cart.Items.Count == 0)
-            throw new BadRequestException("Cart is empty.");
+        long amount;
+        var  metadata = new Dictionary<string, string>();
 
-        var amount = (long)(cart.Total * 100);
+        if (userId is not null)
+        {
+            var cart = await cartService.GetCartAsync(userId);
+            if (cart is null || cart.Items.Count == 0)
+                throw new BadRequestException("Cart is empty.");
+
+            amount = (long)(cart.Total * 0.9m * 100); // 10% member discount
+            metadata["userId"] = userId;
+        }
+        else
+        {
+            if (guestAmount is null or <= 0)
+                throw new BadRequestException("Invalid cart amount.");
+
+            amount = (long)(guestAmount.Value * 100);
+        }
 
         var options = new PaymentIntentCreateOptions
         {
-            Amount   = amount,
-            Currency = "eur",
+            Amount             = amount,
+            Currency           = "eur",
             PaymentMethodTypes = ["card"],
-            Metadata = new Dictionary<string, string> { ["userId"] = userId }
+            Metadata           = metadata,
         };
 
         var service = new PaymentIntentService();

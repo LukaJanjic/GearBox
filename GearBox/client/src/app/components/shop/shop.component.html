@@ -2,7 +2,7 @@
 <section class="bg-gray-900 border-b-4 border-green-600">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <p class="text-green-600 text-sm font-semibold uppercase tracking-widest mb-2">GearBox Store</p>
-    <h1 class="text-4xl font-bold text-white tracking-tight">Parts & Accessories</h1>
+    <h1 class="text-4xl font-bold text-white tracking-tight">Outdoor & Adventure Gear</h1>
     @if (!loading() && !error()) {
       <p class="mt-2 text-gray-400 text-sm">
         Showing {{ products().length }} of {{ totalCount() }} products
@@ -23,103 +23,154 @@
       <div class="flex items-center justify-between px-4 py-3 bg-gray-900">
         <span class="text-sm font-semibold text-white uppercase tracking-widest">Filters</span>
         @if (hasActiveFilters()) {
-          <button (click)="clearFilters()"
-            class="text-xs text-green-500 hover:text-orange-300 font-medium transition-colors">
+          <button (click)="clearFilters()" class="text-xs text-green-500 hover:text-orange-300 font-medium transition-colors">
             Clear all
           </button>
         }
       </div>
 
       <!-- Search -->
-      <div class="p-4 border-b border-gray-100">
-        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Search</h3>
-        <div class="relative">
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+      <div class="border-b border-gray-100">
+        <button (click)="filterOpen.search.update(v => !v)"
+          class="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors">
+          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Search</h3>
+          <svg class="w-4 h-4 text-gray-400 transition-transform duration-200"
+            [class.rotate-180]="filterOpen.search()"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
-          <input type="text" #searchInput
-            [value]="search()"
-            (blur)="onSearchChange(searchInput.value)"
-            placeholder="Search products..."
-            class="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400" />
-        </div>
+        </button>
+        @if (filterOpen.search()) {
+          <div class="px-4 pb-4">
+            <div class="relative">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+              </svg>
+              <input type="text" #searchInput
+                [value]="search()"
+                (blur)="onSearchChange(searchInput.value)"
+                placeholder="Search products..."
+                class="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400"/>
+            </div>
+          </div>
+        }
       </div>
 
       <!-- Sort -->
-      <div class="p-4 border-b border-gray-100">
-        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Sort By</h3>
-        <select
-          [ngModel]="sort()"
-          (ngModelChange)="onSortChange($event)"
-          class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-700 bg-white cursor-pointer">
-          @for (opt of sortOptions; track opt.value) {
-            <option [value]="opt.value">{{ opt.label }}</option>
-          }
-        </select>
+      <div class="border-b border-gray-100">
+        <button (click)="filterOpen.sort.update(v => !v)"
+          class="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors">
+          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Sort By</h3>
+          <svg class="w-4 h-4 text-gray-400 transition-transform duration-200"
+            [class.rotate-180]="filterOpen.sort()"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        @if (filterOpen.sort()) {
+          <div class="px-4 pb-4">
+            <select [ngModel]="sort()" (ngModelChange)="onSortChange($event)"
+              class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent text-gray-700 bg-white cursor-pointer">
+              @for (opt of sortOptions; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+          </div>
+        }
       </div>
 
-      <!-- Price Range -->
-      <div class="p-4 border-b border-gray-100">
-        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Price (€)</h3>
-        <div class="flex gap-2 items-center">
-          <input type="number" #minPriceInput
-            [value]="minPrice() ?? ''"
-            (blur)="onMinPriceChange(minPriceInput.value ? +minPriceInput.value : null)"
-            placeholder="Min"
-            min="0"
-            class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400" />
-          <span class="text-gray-400 shrink-0">–</span>
-          <input type="number" #maxPriceInput
-            [value]="maxPrice() ?? ''"
-            (blur)="onMaxPriceChange(maxPriceInput.value ? +maxPriceInput.value : null)"
-            placeholder="Max"
-            min="0"
-            class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400" />
-        </div>
+      <!-- Price -->
+      <div class="border-b border-gray-100">
+        <button (click)="filterOpen.price.update(v => !v)"
+          class="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors">
+          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Price (€)</h3>
+          <svg class="w-4 h-4 text-gray-400 transition-transform duration-200"
+            [class.rotate-180]="filterOpen.price()"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        @if (filterOpen.price()) {
+          <div class="px-4 pb-4">
+            <div class="flex gap-2 items-center">
+              <input type="number" #minPriceInput
+                [value]="minPrice() ?? ''"
+                (blur)="onMinPriceChange(minPriceInput.value ? +minPriceInput.value : null)"
+                placeholder="Min" min="0"
+                class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400"/>
+              <span class="text-gray-400 shrink-0">–</span>
+              <input type="number" #maxPriceInput
+                [value]="maxPrice() ?? ''"
+                (blur)="onMaxPriceChange(maxPriceInput.value ? +maxPriceInput.value : null)"
+                placeholder="Max" min="0"
+                class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400"/>
+            </div>
+          </div>
+        }
       </div>
 
       <!-- Brands -->
-      <div class="p-4 border-b border-gray-100">
-        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Brand</h3>
-        @if (brands().length === 0) {
-          <p class="text-xs text-gray-400 italic">Loading...</p>
+      <div class="border-b border-gray-100">
+        <button (click)="filterOpen.brands.update(v => !v)"
+          class="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors">
+          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Brand</h3>
+          <svg class="w-4 h-4 text-gray-400 transition-transform duration-200"
+            [class.rotate-180]="filterOpen.brands()"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        @if (filterOpen.brands()) {
+          <div class="px-4 pb-4">
+            @if (brands().length === 0) {
+              <p class="text-xs text-gray-400 italic">Loading...</p>
+            }
+            <div class="flex flex-col gap-2">
+              @for (brand of brands(); track brand.id) {
+                <label class="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="checkbox"
+                    [checked]="selectedBrands().includes(brand.name)"
+                    (change)="toggleBrand(brand.name)"
+                    class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-600 cursor-pointer"/>
+                  <span class="text-sm text-gray-700 group-hover:text-green-600 transition-colors">{{ brand.name }}</span>
+                </label>
+              }
+            </div>
+          </div>
         }
-        <div class="flex flex-col gap-2">
-          @for (brand of brands(); track brand.id) {
-            <label class="flex items-center gap-2.5 cursor-pointer group">
-              <input type="checkbox"
-                [checked]="selectedBrands().includes(brand.name)"
-                (change)="toggleBrand(brand.name)"
-                class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-600 cursor-pointer" />
-              <span class="text-sm text-gray-700 group-hover:text-green-600 transition-colors">
-                {{ brand.name }}
-              </span>
-            </label>
-          }
-        </div>
       </div>
 
       <!-- Categories -->
-      <div class="p-4">
-        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Category</h3>
-        @if (categories().length === 0) {
-          <p class="text-xs text-gray-400 italic">Loading...</p>
+      <div>
+        <button (click)="filterOpen.categories.update(v => !v)"
+          class="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors">
+          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest">Category</h3>
+          <svg class="w-4 h-4 text-gray-400 transition-transform duration-200"
+            [class.rotate-180]="filterOpen.categories()"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        @if (filterOpen.categories()) {
+          <div class="px-4 pb-4">
+            @if (categories().length === 0) {
+              <p class="text-xs text-gray-400 italic">Loading...</p>
+            }
+            <div class="flex flex-col gap-2">
+              @for (category of categories(); track category.id) {
+                <label class="flex items-center gap-2.5 cursor-pointer group">
+                  <input type="checkbox"
+                    [checked]="selectedCategories().includes(category.name)"
+                    (change)="toggleCategory(category.name)"
+                    class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-600 cursor-pointer"/>
+                  <span class="text-sm text-gray-700 group-hover:text-green-600 transition-colors">{{ category.name }}</span>
+                </label>
+              }
+            </div>
+          </div>
         }
-        <div class="flex flex-col gap-2">
-          @for (category of categories(); track category.id) {
-            <label class="flex items-center gap-2.5 cursor-pointer group">
-              <input type="checkbox"
-                [checked]="selectedCategories().includes(category.name)"
-                (change)="toggleCategory(category.name)"
-                class="w-4 h-4 rounded border-gray-300 text-green-600 focus:ring-green-600 cursor-pointer" />
-              <span class="text-sm text-gray-700 group-hover:text-green-600 transition-colors">
-                {{ category.name }}
-              </span>
-            </label>
-          }
-        </div>
       </div>
 
     </div>
@@ -161,7 +212,7 @@
     <!-- Loading -->
     @if (loading()) {
       <div class="flex flex-col items-center justify-center h-64 gap-4">
-        <mat-spinner diameter="44" />
+        <mat-spinner diameter="44"/>
         <p class="text-gray-400 text-sm tracking-widest uppercase">Loading products...</p>
       </div>
     }
@@ -169,12 +220,6 @@
     <!-- Error -->
     @if (error()) {
       <div class="flex flex-col items-center justify-center h-64 gap-3">
-        <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center">
-          <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-          </svg>
-        </div>
         <p class="text-gray-500 text-sm">{{ error() }}</p>
       </div>
     }
@@ -196,13 +241,10 @@
             <div class="relative bg-gray-900 h-48 flex items-center justify-center overflow-hidden">
               @if (product.pictureUrl) {
                 <img [src]="product.pictureUrl" [alt]="product.name"
-                  class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-300" />
+                  class="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-300"/>
               } @else {
-                <svg class="w-16 h-16 text-gray-600 group-hover:text-green-600 transition-colors duration-300"
-                  fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <svg class="w-16 h-16 text-gray-600" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/>
                 </svg>
               }
               <span class="absolute top-3 left-3 text-xs font-medium px-2.5 py-1 rounded bg-gray-950/80 text-gray-300 backdrop-blur-sm">
@@ -212,6 +254,11 @@
                 [class]="product.isAvailable ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'">
                 {{ product.isAvailable ? 'In Stock' : 'Out of Stock' }}
               </span>
+              @if (authService.isLoggedIn()) {
+                <span class="absolute bottom-3 left-3 text-xs font-bold px-2 py-0.5 rounded bg-green-600/90 text-white">
+                  −10%
+                </span>
+              }
               <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></div>
             </div>
 
@@ -219,12 +266,18 @@
               <span class="text-xs font-bold text-green-600 uppercase tracking-widest">{{ product.brand }}</span>
               <h3 class="mt-1 text-sm font-semibold text-gray-900 leading-snug line-clamp-2 flex-1">{{ product.name }}</h3>
               <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
-                <span class="text-xl font-bold text-gray-900">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</span>
+                <div>
+                  @if (authService.isLoggedIn()) {
+                    <p class="text-xs text-gray-400 line-through leading-none">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</p>
+                    <p class="text-xl font-bold text-gray-900">{{ discountedPrice(product.price) | currency:'EUR':'symbol':'1.2-2' }}</p>
+                  } @else {
+                    <p class="text-xl font-bold text-gray-900">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</p>
+                  }
+                </div>
                 <span class="text-xs text-gray-400">{{ product.stock }} in stock</span>
               </div>
-              <button
-                (click)="goToDetail(product.id)"
-                class="mt-3 w-full py-2 rounded-lg text-sm font-semibold border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed"
+              <button (click)="goToDetail(product.id)"
+                class="mt-3 w-full py-2 rounded-lg text-sm font-semibold border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                 [disabled]="!product.isAvailable">
                 {{ product.isAvailable ? 'View Details' : 'Unavailable' }}
               </button>

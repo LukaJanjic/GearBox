@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProductService } from '../../core/services/product.service';
 import { BrandService } from '../../core/services/brand.service';
 import { CategoryService } from '../../core/services/category.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Product } from '../../core/models/product.model';
 import { Brand } from '../../core/models/brand.model';
 import { Category } from '../../core/models/category.model';
@@ -20,6 +21,19 @@ export class ShopComponent implements OnInit {
   private brandService    = inject(BrandService);
   private categoryService = inject(CategoryService);
   private router          = inject(Router);
+  authService             = inject(AuthService);
+
+  // collapsible filter sections — all start closed
+  filterOpen = {
+    search:     signal(false),
+    sort:       signal(false),
+    price:      signal(false),
+    brands:     signal(false),
+    categories: signal(false),
+  };
+
+  discountedPrice = (price: number) =>
+    this.authService.isLoggedIn() ? +(price * 0.9).toFixed(2) : price;
 
   products   = signal<Product[]>([]);
   brands     = signal<Brand[]>([]);

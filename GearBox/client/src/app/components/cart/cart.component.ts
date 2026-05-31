@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
+import { AuthService } from '../../core/services/auth.service';
 import { CartItem } from '../../core/models/cart.model';
 
 @Component({
@@ -12,6 +13,9 @@ import { CartItem } from '../../core/models/cart.model';
 })
 export class CartComponent {
   cartService = inject(CartService);
+  private authService = inject(AuthService);
+
+  isLoggedIn = computed(() => this.authService.isLoggedIn());
 
   increment(item: CartItem) {
     this.cartService.updateQuantity(item.productId, item.quantity + 1).subscribe();

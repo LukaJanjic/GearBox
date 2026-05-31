@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, signal, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal, computed, ElementRef, ViewChild } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -22,11 +22,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private router         = inject(Router);
   cartService            = inject(CartService);
   private paymentService = inject(PaymentService);
-  private authService    = inject(AuthService);
+  authService            = inject(AuthService);
 
-  step         = signal<1 | 2 | 3 | 4>(1);
-  loading      = signal(false);
-  paymentError = signal<string | null>(null);
+  step            = signal<1 | 2 | 3 | 4>(1);
+  loading         = signal(false);
+  paymentError    = signal<string | null>(null);
+  bannerDismissed = signal(false);
+
+  isLoggedIn  = computed(() => this.authService.isLoggedIn());
+  showBanner  = computed(() => !this.isLoggedIn() && !this.bannerDismissed());
+  finalTotal  = computed(() => this.cartService.discountedTotal());
+  savedAmount = computed(() => +(this.cartService.total() * 0.1).toFixed(2));
 
   private stripe:   Stripe | null = null;
   private elements: StripeElements | null = null;
@@ -42,10 +48,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   submitted = signal(false);
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigateByUrl('/login');
-      return;
-    }
     if (!this.cartService.cart() || this.cartService.itemCount() === 0) {
       this.router.navigateByUrl('/shop');
     }
@@ -65,7 +67,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.loading.set(true);
     this.paymentError.set(null);
 
-    this.paymentService.createPaymentIntent().subscribe({
+    const guestTotal = this.isLoggedIn() ? undefined : this.cartService.total();
+
+    this.paymentService.createPaymentIntent(guestTotal).subscribe({
       next: async ({ clientSecret }) => {
         this.stripe = await loadStripe(environment.stripePublishableKey);
 
@@ -81,14 +85,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         });
 
         const paymentEl = this.elements.create('payment');
-
         this.step.set(3);
         this.loading.set(false);
 
-        // mount after Angular renders the element
-        setTimeout(() => {
-          paymentEl.mount(this.paymentElementRef.nativeElement);
-        }, 0);
+        setTimeout(() => paymentEl.mount(this.paymentElementRef.nativeElement), 0);
       },
       error: (err) => {
         this.paymentError.set(err?.error?.message ?? 'Failed to initialize payment.');

@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Product } from '../../core/models/product.model';
 
 @Component({
@@ -15,6 +16,7 @@ export class ProductDetailComponent implements OnInit {
   private route          = inject(ActivatedRoute);
   private productService = inject(ProductService);
   private cartService    = inject(CartService);
+  authService            = inject(AuthService);
 
   product  = signal<Product | null>(null);
   loading  = signal(true);

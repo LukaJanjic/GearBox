@@ -80,9 +80,21 @@
 
             <!-- Price -->
             <div class="flex items-baseline gap-3 mb-6">
-              <span class="text-4xl font-extrabold text-gray-900">
-                {{ p.price | currency:'EUR':'symbol':'1.2-2' }}
-              </span>
+              @if (authService.isLoggedIn()) {
+                <span class="text-4xl font-extrabold text-gray-900">
+                  {{ (p.price * 0.9) | currency:'EUR':'symbol':'1.2-2' }}
+                </span>
+                <span class="text-xl text-gray-400 line-through">
+                  {{ p.price | currency:'EUR':'symbol':'1.2-2' }}
+                </span>
+                <span class="text-xs font-bold text-green-600 bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">
+                  −10% member
+                </span>
+              } @else {
+                <span class="text-4xl font-extrabold text-gray-900">
+                  {{ p.price | currency:'EUR':'symbol':'1.2-2' }}
+                </span>
+              }
             </div>
 
             <!-- Description -->

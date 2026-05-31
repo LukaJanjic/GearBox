@@ -94,10 +94,21 @@
     <div class="border-t border-gray-800 px-6 py-5 space-y-4">
 
       <!-- Subtotal -->
-      <div class="flex items-center justify-between">
-        <span class="text-gray-400 text-sm">Subtotal</span>
-        <span class="text-white font-bold text-lg">{{ cartService.total() | currency:'EUR':'symbol':'1.2-2' }}</span>
-      </div>
+      @if (isLoggedIn()) {
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-gray-500">Original</span>
+          <span class="text-gray-500 line-through">{{ cartService.total() | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-green-400 text-sm font-medium">Member price (−10%)</span>
+          <span class="text-white font-bold text-lg">{{ cartService.discountedTotal() | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </div>
+      } @else {
+        <div class="flex items-center justify-between">
+          <span class="text-gray-400 text-sm">Subtotal</span>
+          <span class="text-white font-bold text-lg">{{ cartService.total() | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </div>
+      }
 
       <!-- Checkout -->
       <button (click)="cartService.closeCart()" routerLink="/checkout"

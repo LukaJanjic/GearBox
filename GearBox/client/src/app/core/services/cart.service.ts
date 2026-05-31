@@ -15,9 +15,13 @@ export class CartService {
 
   private _cart = signal<ShoppingCart | null>(null);
 
-  cart      = this._cart.asReadonly();
-  itemCount = computed(() => this._cart()?.itemCount ?? 0);
-  total     = computed(() => this._cart()?.total ?? 0);
+  cart             = this._cart.asReadonly();
+  itemCount        = computed(() => this._cart()?.itemCount ?? 0);
+  total            = computed(() => this._cart()?.total ?? 0);
+  discountedTotal  = computed(() => {
+    const t = this._cart()?.total ?? 0;
+    return this.authService.isLoggedIn() ? +(t * 0.9).toFixed(2) : t;
+  });
 
   isOpen = signal(false);
 

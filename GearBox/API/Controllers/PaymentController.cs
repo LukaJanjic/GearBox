@@ -5,16 +5,18 @@ using System.Security.Claims;
 
 namespace API.Controllers;
 
+public record GuestPaymentRequest(decimal Amount);
+
 [Route("api/[controller]")]
 [ApiController]
 public class PaymentController(IPaymentService paymentService) : ControllerBase
 {
     [HttpPost("create-intent")]
-    [Authorize]
-    public async Task<ActionResult<string>> CreateIntent()
+    [AllowAnonymous]
+    public async Task<ActionResult<string>> CreateIntent([FromBody] GuestPaymentRequest? request)
     {
-        var userId       = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-        var clientSecret = await paymentService.CreatePaymentIntentAsync(userId);
+        var userId       = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var clientSecret = await paymentService.CreatePaymentIntentAsync(userId, request?.Amount);
         return Ok(new { clientSecret });
     }
 
