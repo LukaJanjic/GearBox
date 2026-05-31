@@ -57,32 +57,32 @@ interface Stat {
 })
 export class AboutComponent implements OnInit {
   stats = signal<Stat[]>([
-    { label: 'Products in Stock',   target: 2400,  suffix: '+', current: 0 },
-    { label: 'Brands Available',    target: 80,    suffix: '+', current: 0 },
-    { label: 'Orders Delivered',    target: 15000, suffix: '+', current: 0 },
-    { label: 'Years of Experience', target: 12,    suffix: '',  current: 0 },
+    { label: 'Products in Stock',   target: 500,  suffix: '+', current: 0 },
+    { label: 'Brands Available',    target: 5,    suffix: '',  current: 0 },
+    { label: 'Orders Delivered',    target: 8000, suffix: '+', current: 0 },
+    { label: 'Years of Experience', target: 8,    suffix: '',  current: 0 },
   ]);
 
   values = [
     {
       icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-      title: 'Quality First',
-      desc: 'Every part we sell goes through rigorous quality checks. We only stock components from manufacturers that meet our strict standards.',
+      title: 'Tested Gear Only',
+      desc: 'Every product we stock is field-tested by our team. If it doesn\'t perform in real conditions, it doesn\'t make it to our shelves.',
     },
     {
       icon: 'M13 10V3L4 14h7v7l9-11h-7z',
       title: 'Fast Delivery',
-      desc: 'Same-day dispatch on all orders placed before 2PM. Our logistics network ensures your parts arrive when you need them.',
+      desc: 'Same-day dispatch on orders placed before 2PM. Get your gear before your next adventure — not after it.',
     },
     {
       icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
-      title: 'Expert Support',
-      desc: 'Our team of certified mechanics is available 7 days a week to help you find the right part for your specific vehicle.',
+      title: 'Expert Advice',
+      desc: 'Our team are active hikers, trail runners and climbers. We help you choose the right gear for your specific route and conditions.',
     },
     {
-      icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4',
-      title: 'Genuine Parts',
-      desc: 'We are an authorised distributor for all major brands. Every OEM and aftermarket part comes with full manufacturer warranty.',
+      icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064',
+      title: 'Top Brands',
+      desc: 'Authorised retailer for Salomon, The North Face, Osprey, Garmin and Naturehike. Every product carries full manufacturer warranty.',
     },
   ];
 
